@@ -20,7 +20,7 @@ public class Board {
   }
 
   public Board take(Square toPlay) {
-    Set<Square> newBoard = new HashSet<Square>(takenSquares);
+    var newBoard = new HashSet<Square>(takenSquares);
     newBoard.add(toPlay);
     return new Board(newBoard);
   }
