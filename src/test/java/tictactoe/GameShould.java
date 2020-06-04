@@ -30,4 +30,15 @@ public class GameShould {
         new GameState(GAME_ON, O)
     );
   }
+
+  @Test
+  public void alternate_the_players() {
+    var game = new Game();
+    game = game.play();
+    game = game.play();
+
+    assertThat(game.state()).isEqualTo(
+        new GameState(GAME_ON, X)
+    );
+  }
 }
