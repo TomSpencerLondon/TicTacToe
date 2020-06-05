@@ -1,5 +1,6 @@
 package tictactoe;
 
+import static java.util.Arrays.stream;
 import static org.fest.assertions.Assertions.assertThat;
 import static tictactoe.Player.O;
 import static tictactoe.Player.X;
@@ -47,15 +48,25 @@ public class GameShould {
   }
 
   private Game play(Square ...squares){
-    return Arrays.stream(squares)
+    return stream(squares)
         .reduce(new Game(), Game::play, (a, b) -> null);
   }
 
+  // TODO: 38:05 https://www.youtube.com/watch?v=bRIPiF68NUM&t=695s
   // X O X
   // O X X
   // O X O
   @Test
   public void recognise_a_draw() {
-
+    var game = play(
+      TOP_LEFT,
+      TOP_MIDDLE,
+        TOP_RIGHT,
+        CENTRE_LEFT,
+        CENTRE_MIDDLE,
+        BOTTOM_LEFT,
+        CENTRE_RIGHT,
+        BOTTOM_MIDDLE,
+        BOTTOM_RIGHT);
   }
 }
