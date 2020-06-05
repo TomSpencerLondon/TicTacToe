@@ -8,6 +8,7 @@ import static tictactoe.Square.TOP_MIDDLE;
 import static tictactoe.Status.GAME_ON;
 import static tictactoe.Status.SQUARE_ALREADY_PLAYED;
 
+import java.util.Arrays;
 import junitparams.JUnitParamsRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,12 +39,23 @@ public class GameShould {
   @Test
   public void game_should_not_allow_a_square_to_be_played_twice() {
     var game = new Game();
-    game = game.play(TOP_LEFT);
-    game = game.play(TOP_MIDDLE);
-    game = game.play(TOP_LEFT);
+    game = play(TOP_LEFT, TOP_MIDDLE, TOP_LEFT);
 
     assertThat(game.state()).isEqualTo(
         new GameState(SQUARE_ALREADY_PLAYED, X)
     );
+  }
+
+  private Game play(Square ...squares){
+    return Arrays.stream(squares)
+        .reduce(new Game(), Game::play, (a, b) -> null);
+  }
+
+  // X O X
+  // O X X
+  // O X O
+  @Test
+  public void recognise_a_draw() {
+
   }
 }
