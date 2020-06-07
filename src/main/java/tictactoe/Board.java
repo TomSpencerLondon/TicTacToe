@@ -1,5 +1,8 @@
 package tictactoe;
 
+import static tictactoe.Square.BOTTOM_LEFT;
+import static tictactoe.Square.BOTTOM_MIDDLE;
+import static tictactoe.Square.BOTTOM_RIGHT;
 import static tictactoe.Square.CENTRE_LEFT;
 import static tictactoe.Square.CENTRE_MIDDLE;
 import static tictactoe.Square.CENTRE_RIGHT;
@@ -40,7 +43,8 @@ public class Board {
   public boolean hasWon() {
     var winningCombos = Stream.of(
         Stream.of(TOP_LEFT, TOP_MIDDLE, TOP_RIGHT),
-        Stream.of(CENTRE_LEFT, CENTRE_MIDDLE, CENTRE_RIGHT)
+        Stream.of(CENTRE_LEFT, CENTRE_MIDDLE, CENTRE_RIGHT),
+        Stream.of(BOTTOM_LEFT, TOP_LEFT, BOTTOM_MIDDLE, TOP_MIDDLE, BOTTOM_RIGHT)
     );
     return winningCombos.anyMatch(combo -> combo.allMatch(square -> takenSquares.contains(square)));
   }
