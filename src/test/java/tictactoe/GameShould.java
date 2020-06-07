@@ -2,10 +2,19 @@ package tictactoe;
 
 import static java.util.Arrays.stream;
 import static org.fest.assertions.Assertions.assertThat;
+import static tictactoe.Player.NOBODY;
 import static tictactoe.Player.O;
 import static tictactoe.Player.X;
+import static tictactoe.Square.BOTTOM_LEFT;
+import static tictactoe.Square.BOTTOM_MIDDLE;
+import static tictactoe.Square.BOTTOM_RIGHT;
+import static tictactoe.Square.CENTRE_LEFT;
+import static tictactoe.Square.CENTRE_MIDDLE;
+import static tictactoe.Square.CENTRE_RIGHT;
 import static tictactoe.Square.TOP_LEFT;
 import static tictactoe.Square.TOP_MIDDLE;
+import static tictactoe.Square.TOP_RIGHT;
+import static tictactoe.Status.DRAW;
 import static tictactoe.Status.GAME_ON;
 import static tictactoe.Status.SQUARE_ALREADY_PLAYED;
 
@@ -52,7 +61,6 @@ public class GameShould {
         .reduce(new Game(), Game::play, (a, b) -> null);
   }
 
-  // TODO: 38:05 https://www.youtube.com/watch?v=bRIPiF68NUM&t=695s
   // X O X
   // O X X
   // O X O
@@ -60,7 +68,7 @@ public class GameShould {
   public void recognise_a_draw() {
     var game = play(
       TOP_LEFT,
-      TOP_MIDDLE,
+      Square.TOP_MIDDLE,
         TOP_RIGHT,
         CENTRE_LEFT,
         CENTRE_MIDDLE,
@@ -68,5 +76,7 @@ public class GameShould {
         CENTRE_RIGHT,
         BOTTOM_MIDDLE,
         BOTTOM_RIGHT);
+
+    assertThat(game.state()).isEqualTo(new GameState(DRAW, NOBODY));
   }
 }
