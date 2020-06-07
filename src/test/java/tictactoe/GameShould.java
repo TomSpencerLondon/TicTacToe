@@ -74,7 +74,8 @@ public class GameShould {
 
   @ParameterizedTest
   @CsvSource({
-      "TOP_LEFT,CENTRE_LEFT,TOP_MIDDLE,CENTRE_MIDDLE,TOP_RIGHT"
+      "TOP_LEFT,CENTRE_LEFT,TOP_MIDDLE,CENTRE_MIDDLE,TOP_RIGHT",
+      "CENTRE_LEFT,TOP_LEFT,CENTRE_MIDDLE,TOP_MIDDLE,CENTRE_RIGHT",
   })
   public void recognise_when_x_has_won(Square s1, Square s2, Square s3, Square s4, Square s5) {
     var game = play(s1, s2, s3, s4, s5);
