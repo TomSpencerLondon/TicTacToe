@@ -90,7 +90,7 @@ public class GameShould {
   }
 
   @Test
-  void name() {
+  void recognise_when_o_has_won() {
     var game = play(
         BOTTOM_LEFT,
         TOP_LEFT,
@@ -100,5 +100,18 @@ public class GameShould {
         TOP_RIGHT
     );
     assertEquals(new GameState(Status.O_HAS_WON, NOBODY), game.state());
+  }
+
+  @Test
+  void not_permit_play_after_game_is_won() {
+    var game = play(
+        TOP_LEFT,
+        CENTRE_LEFT,
+        TOP_MIDDLE,
+        CENTRE_MIDDLE,
+        TOP_RIGHT,
+        CENTRE_RIGHT);
+
+    assertEquals(new GameState(Status.X_HAS_WON, NOBODY), game.state());
   }
 }
