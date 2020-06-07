@@ -4,6 +4,7 @@ import static java.util.Arrays.stream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static tictactoe.Player.NOBODY;
 import static tictactoe.Player.X;
+import static tictactoe.Square.*;
 import static tictactoe.Square.BOTTOM_LEFT;
 import static tictactoe.Square.BOTTOM_MIDDLE;
 import static tictactoe.Square.BOTTOM_RIGHT;
@@ -60,14 +61,14 @@ public class GameShould {
   public void recognise_a_draw() {
     var game = play(
         TOP_LEFT,
-        Square.TOP_MIDDLE,
+        TOP_MIDDLE,
         TOP_RIGHT,
         CENTRE_LEFT,
         CENTRE_MIDDLE,
         BOTTOM_LEFT,
         CENTRE_RIGHT,
-        BOTTOM_MIDDLE,
-        BOTTOM_RIGHT);
+        BOTTOM_RIGHT,
+        BOTTOM_MIDDLE);
 
     assertEquals(game.state(), new GameState(DRAW, NOBODY));
   }
@@ -81,7 +82,7 @@ public class GameShould {
       "TOP_MIDDLE,TOP_LEFT,CENTRE_MIDDLE,CENTRE_LEFT,BOTTOM_MIDDLE",
       "TOP_RIGHT,TOP_LEFT,CENTRE_RIGHT,CENTRE_LEFT,BOTTOM_RIGHT",
       "TOP_LEFT,BOTTOM_LEFT,CENTRE_MIDDLE,TOP_RIGHT,BOTTOM_RIGHT",
-      "TOP_RIGHT,BOTTOM_RIGHT,CENTRE_MIDDLE,BOTTOM_RIGHT,BOTTOM_LEFT"
+      "TOP_RIGHT,BOTTOM_RIGHT,CENTRE_MIDDLE,BOTTOM_MIDDLE,BOTTOM_LEFT"
   })
   public void recognise_when_x_has_won(Square s1, Square s2, Square s3, Square s4, Square s5) {
     var game = play(s1, s2, s3, s4, s5);
@@ -113,5 +114,25 @@ public class GameShould {
         CENTRE_RIGHT);
 
     assertEquals(new GameState(Status.X_HAS_WON, NOBODY), game.state());
+  }
+
+  // X O X
+  // O X X
+  // O O X
+  @Test
+  void recognise_win_when_won_on_final_square() {
+    var game = play(
+        TOP_LEFT, // X
+        TOP_MIDDLE, // O
+        TOP_RIGHT, // X
+        CENTRE_LEFT, // O
+        CENTRE_MIDDLE, // X
+        BOTTOM_LEFT, // O
+        CENTRE_RIGHT, // X
+        BOTTOM_MIDDLE, // O
+        BOTTOM_RIGHT); // X
+
+    assertEquals(new GameState(Status.X_HAS_WON, NOBODY), game.state());
+
   }
 }
