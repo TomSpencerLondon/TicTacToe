@@ -1,7 +1,12 @@
 package tictactoe;
 
+import static tictactoe.Square.TOP_LEFT;
+import static tictactoe.Square.TOP_MIDDLE;
+import static tictactoe.Square.TOP_RIGHT;
+
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Stream;
 
 public class Board {
 
@@ -27,5 +32,10 @@ public class Board {
 
   public boolean isFull() {
     return takenSquares.size() == 9;
+  }
+
+  public boolean hasWon() {
+    return Stream.of(TOP_LEFT, TOP_MIDDLE, TOP_RIGHT)
+        .allMatch(square -> takenSquares.contains(square));
   }
 }
