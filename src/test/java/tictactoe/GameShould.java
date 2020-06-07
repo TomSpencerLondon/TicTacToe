@@ -88,4 +88,17 @@ public class GameShould {
 
     assertEquals(game.state(), new GameState(X_HAS_WON, NOBODY));
   }
+
+  @Test
+  void name() {
+    var game = play(
+        BOTTOM_LEFT,
+        TOP_LEFT,
+        CENTRE_LEFT,
+        TOP_MIDDLE,
+        CENTRE_MIDDLE,
+        TOP_RIGHT
+    );
+    assertEquals(new GameState(Status.O_HAS_WON, NOBODY), game.state());
+  }
 }
