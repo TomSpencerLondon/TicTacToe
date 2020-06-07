@@ -44,7 +44,12 @@ public class Board {
     var winningCombos = Stream.of(
         Stream.of(TOP_LEFT, TOP_MIDDLE, TOP_RIGHT),
         Stream.of(CENTRE_LEFT, CENTRE_MIDDLE, CENTRE_RIGHT),
-        Stream.of(BOTTOM_LEFT, TOP_LEFT, BOTTOM_MIDDLE, TOP_MIDDLE, BOTTOM_RIGHT)
+        Stream.of(BOTTOM_LEFT, BOTTOM_MIDDLE, BOTTOM_RIGHT),
+        Stream.of(TOP_LEFT, CENTRE_LEFT, BOTTOM_LEFT),
+        Stream.of(TOP_MIDDLE, CENTRE_MIDDLE, BOTTOM_MIDDLE),
+        Stream.of(TOP_RIGHT, CENTRE_RIGHT, BOTTOM_RIGHT),
+        Stream.of(TOP_LEFT, CENTRE_MIDDLE, BOTTOM_RIGHT),
+        Stream.of(TOP_RIGHT, CENTRE_MIDDLE, BOTTOM_LEFT)
     );
     return winningCombos.anyMatch(combo -> combo.allMatch(square -> takenSquares.contains(square)));
   }
